@@ -1,3 +1,13 @@
+.app-container {
+  padding: 10px;
+  margin: 10px;
+}
+.main-container {
+  border: 5px solid green;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+}
 .list-container {
   border: 1px solid black;
   padding: 10px;

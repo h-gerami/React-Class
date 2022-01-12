@@ -4,8 +4,10 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
-const UserList = ({ listHeading, listDetails, userImg }) => {
-  //   const { listHeading, listDetails, userImg } = props;
+import { Apple, Watch } from "@mui/icons-material";
+const UserList = (props) => {
+  console.log(props, "UserList Props");
+  const { listHeading, listDetails, userImg, isApple } = props;
   //   const test = {
   //     name: "hossein",
   //     lastName: "Gerami",
@@ -14,10 +16,13 @@ const UserList = ({ listHeading, listDetails, userImg }) => {
   //   const { name } = test;
   //   console.log(name, "destructuring");
   //   console.log(listHeading, "list heading");
+  console.log(isApple, "isApple");
   return (
     <ListItem alignItems="center">
       <ListItemAvatar>
-        <Avatar alt="Travis Howard" src={userImg} />
+        {/* <Avatar alt="Travis Howard" src={userImg} /> */}
+        {isApple ? <Apple /> : <Watch />}
+        {isApple && <p>asdsd</p>}
       </ListItemAvatar>
       <ListItemText
         primary={listHeading}
@@ -37,5 +42,8 @@ const UserList = ({ listHeading, listDetails, userImg }) => {
       />
     </ListItem>
   );
+};
+UserList.defaultProps = {
+  listHeading: "Hello :)",
 };
 export default UserList;
