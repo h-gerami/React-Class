@@ -44,6 +44,12 @@ class App extends Component {
       showHosseinImg: !this.state.showHosseinImg,
       toggleIcons: !this.state.toggleIcons,
     });
+    // this.setState({
+    //   showHosseinImg: !this.state.showHosseinImg,
+    // });
+    // this.setState({
+    //   toggleIcons: !this.state.toggleIcons,
+    // });
   }
   renderComponents() {
     if (this.state.name !== "React") {

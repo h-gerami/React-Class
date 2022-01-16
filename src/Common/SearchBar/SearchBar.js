@@ -1,5 +1,6 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
+import { Button, Grid } from "@mui/material";
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
@@ -8,16 +9,41 @@ class SearchBar extends React.Component {
   state = {
     searchedText: "",
   };
+  // onFormSubmit(event){   // we have Error now
+  //   event.preventDefault();
+  //   console.log(this.state.searchedText);
+  // };
+  onFormSubmition = (event) => {
+    event.preventDefault();
+    // console.log(this.state.searchedText);
+    this.props.onFormSubmit(this.state.searchedText);
+  };
   render() {
-    const { label } = this.props;
+    const { label, onFormSubmit } = this.props;
     return (
-      <TextField
-        fullWidth
-        onChange={(t) => console.log(t.target.value)}
-        id="outlined-basic"
-        label={label}
-        variant="outlined"
-      />
+      <Grid alignItems={"center"} container spacing={2}>
+        <Grid item xs={9}>
+          <form onSubmit={this.onFormSubmition}>
+            <TextField
+              fullWidth
+              onChange={(t) => this.setState({ searchedText: t.target.value })}
+              id="outlined-basic"
+              label={label}
+              variant="outlined"
+            />
+          </form>
+        </Grid>
+        <Grid alignItems={"center"} item xs={3}>
+          <Button
+            onClick={() => onFormSubmit(this.state.searchedText)}
+            fullWidth
+            variant="contained"
+            size="large"
+          >
+            Search
+          </Button>
+        </Grid>
+      </Grid>
     );
   }
 }
