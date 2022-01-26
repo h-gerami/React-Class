@@ -1,75 +1,53 @@
-import axios from "axios";
-import React, { Component } from "react";
-import SearchBar from "./Common/SearchBar/SearchBar";
-import { API } from "./Global/Statics";
-import ImageCard from "./Common/Card/ImageCard";
-import { Spinner } from "./Common";
-import { List, ListItem } from "@mui/material";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Home from "./Pages/Home";
+import ImageDetailScreen from "./Pages/ImageDetailScreen";
+import ImageSearchScreen from "./Pages/ImageSearchScreen";
+import Login from "./Pages/Login";
 
-class App extends Component {
-  state = {
-    imagesList: [],
-    loading: false,
-  };
-  onSearcheBarClick = (searchedText) => {
-    this.setState({ loading: true });
-    // var requestOptions = {
-    //   method: "GET",
-    //   redirect: "follow",
-    // };
+export default function App() {
+  return (
+    <Router>
+      <div>
+        <nav>
+          <ul className="nav-ul">
+            <li>
+              <Link to="/home">Home</Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/">Image Search</Link>
+            </li>
+          </ul>
+        </nav>
 
-    // fetch(`${API}&query=${searchedText}`, requestOptions)
-    //   .then((response) => response.text())
-    //   .then((result) => console.log(result))
-    //   .catch((error) => console.log("error", error));
-    axios
-      .get(`${API}`, {
-        params: {
-          query: searchedText,
-        },
-      })
-      .then((res) => {
-        console.log(res.data.results);
-        this.setState({ imagesList: res.data.results });
-        this.setState({ loading: false });
-      });
-  };
-  render() {
-    return (
-      <div className="app-container">
-        <p>Please Search your desire Image :)</p>
-        <SearchBar
-          onFormSubmit={this.onSearcheBarClick}
-          // onFormSubmit={(t) => this.onSearcheBarClick(t)}
-          label="Car Name"
-        />
-        <List
-          sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-        >
-          {this.state.imagesList && this.state.imagesList.length > 0
-            ? this.state.imagesList.map((data) => {
-                return (
-                  <ListItem>
-                    <ImageCard
-                      title={data.user.username}
-                      subheader={data.created_at}
-                      image={data.urls.regular}
-                      alt={data.alt_description}
-                      decription={data.user.bio}
-                      avatar={data.user.profile_image.small}
-                    />
-                  </ListItem>
-                );
-              })
-            : null}
-        </List>
-
-        <Spinner
-          isSpinnerOpen={this.state.loading}
-          spinnerText={"Loading ..."}
-        />
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Switch>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/home">
+            <Home />
+          </Route>
+          <Route exact path="/image">
+            <ImageDetailScreen />
+          </Route>
+          <Route exact path="/">
+            <ImageSearchScreen />
+          </Route>
+        </Switch>
       </div>
-    );
-  }
+    </Router>
+  );
 }
-export default App;
+
+// function About() {
+//   return <h2>About</h2>;
+// }
+
+// function Users() {
+//   return <h2>Users</h2>;
+// }

@@ -12,9 +12,10 @@ import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const ImageCard = (props) => {
-  const { title, subheader, image, alt, decription, avatar } = props;
+  const { title, subheader, image, alt, decription, avatar, onCardClick } =
+    props;
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card onClick={onCardClick} sx={{ width: "100%", minHeight: 400 }}>
       <CardHeader
         avatar={
           <Avatar src={avatar} sx={{ bgcolor: red[500] }} aria-label="recipe">
