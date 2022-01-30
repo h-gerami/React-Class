@@ -6,10 +6,11 @@ import ImageCard from "./../Common/Card/ImageCard";
 import { Spinner } from "./../Common";
 import { Grid, List, ListItem } from "@mui/material";
 import { useHistory } from "react-router-dom";
+import { imgDataType } from "../Utils/AppTypes";
 const ImageSearchScreen = () => {
   let history = useHistory();
-  const [imagesList, setImagesList] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [imagesList, setImagesList] = useState<imgDataType[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
   const onSearcheBarClick = (searchedText) => {
     setLoading(true);
     axios
@@ -32,7 +33,7 @@ const ImageSearchScreen = () => {
       <List sx={{ width: "100%", bgcolor: "background.paper" }}>
         <Grid container spacing={0}>
           {imagesList && imagesList.length > 0
-            ? imagesList.map((data) => {
+            ? imagesList.map((data: imgDataType) => {
                 return (
                   <Grid key={data.id} item xs={6}>
                     <ListItem
@@ -53,6 +54,7 @@ const ImageSearchScreen = () => {
                         subheader={data.created_at}
                         image={data.urls.regular}
                         alt={data.alt_description}
+                        imgDesc={data.description}
                         decription={data.user.bio}
                         avatar={data.user.profile_image.small}
                       />

@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Counter from "./Pages/Counter";
 import Home from "./Pages/Home";
 import ImageDetailScreen from "./Pages/ImageDetailScreen";
 import ImageSearchScreen from "./Pages/ImageSearchScreen";
@@ -20,6 +21,9 @@ export default function App() {
             <li>
               <Link to="/">Image Search</Link>
             </li>
+            <li>
+              <Link to="/counter">Counter</Link>
+            </li>
           </ul>
         </nav>
 
@@ -35,6 +39,10 @@ export default function App() {
           <Route exact path="/image">
             <ImageDetailScreen />
           </Route>
+          <Route exact path="/counter">
+            <Counter />
+          </Route>
+
           <Route exact path="/">
             <ImageSearchScreen />
           </Route>

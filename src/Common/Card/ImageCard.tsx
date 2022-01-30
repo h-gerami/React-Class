@@ -10,10 +10,35 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-
-const ImageCard = (props) => {
-  const { title, subheader, image, alt, decription, avatar, onCardClick } =
-    props;
+interface ImageCardType {
+  title: string;
+  subheader: string;
+  image: string;
+  alt: string;
+  decription: string;
+  avatar: string;
+  onCardClick: () => void;
+  imgDesc: string;
+  testData?: [] | null;
+}
+const ImageCard = (props: ImageCardType) => {
+  const {
+    title,
+    subheader,
+    image,
+    alt,
+    decription,
+    avatar,
+    onCardClick,
+    imgDesc,
+    testData,
+  } = props;
+  const dd = React.useMemo(() => {
+    let rr = [];
+    testData.forEach((element) => {
+      console.log(element);
+    });
+  }, []);
   return (
     <Card onClick={onCardClick} sx={{ width: "100%", minHeight: 400 }}>
       <CardHeader
@@ -25,6 +50,7 @@ const ImageCard = (props) => {
         title={title}
         subheader={subheader}
       />
+      <p>{imgDesc}</p>
       <CardMedia component="img" height="194" image={image} alt={alt} />
       <CardContent>
         <Typography variant="body2" color="text.secondary">

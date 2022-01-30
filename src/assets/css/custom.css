@@ -2,6 +2,9 @@
   padding: 10px;
   margin: 10px;
 }
+.container {
+  padding: 40px;
+}
 .main-container {
   border: 5px solid green;
   padding: 10px;
