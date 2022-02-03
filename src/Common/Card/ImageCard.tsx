@@ -33,12 +33,7 @@ const ImageCard = (props: ImageCardType) => {
     imgDesc,
     testData,
   } = props;
-  const dd = React.useMemo(() => {
-    let rr = [];
-    testData.forEach((element) => {
-      console.log(element);
-    });
-  }, []);
+
   return (
     <Card onClick={onCardClick} sx={{ width: "100%", minHeight: 400 }}>
       <CardHeader

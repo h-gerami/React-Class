@@ -40,6 +40,7 @@ const Counter = () => {
     }
   };
   const memorizedData = useMemo(() => {
+    // Call Vary Heavy Fuctions here
     //Memoization
     let f = 0;
     f = counter * counter * counter * counter;

@@ -20,7 +20,7 @@ interface profileImg {
   medium: string;
   large: string;
 }
-interface userType {
+export interface userType {
   id: string;
   username: string;
   name: string;
@@ -30,4 +30,8 @@ interface userType {
   bio: string;
   profile_image: profileImg;
   instagram_username: string;
+}
+export enum LanguageEnum {
+  de = "de",
+  en = "en",
 }

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchBar from "./../Common/SearchBar/SearchBar";
 import { API } from "./../Global/Statics";
 import ImageCard from "./../Common/Card/ImageCard";
@@ -25,6 +25,9 @@ const ImageSearchScreen = () => {
         setLoading(false);
       });
   };
+  useEffect(() => {
+    onSearcheBarClick("tesla");
+  }, []);
   return (
     <div className="app-container">
       <p>Please Search your desire Image :)</p>

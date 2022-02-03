@@ -1,5 +1,9 @@
 import { Button, Grid, TextField } from "@mui/material";
-import React, { useMemo, useReducer, useState } from "react";
+import React, { useMemo, useReducer, useState, useContext } from "react";
+import { LanguageContext } from "../../Context/LanguageContext";
+import { ThemeContext } from "../../Context/ThemeContext";
+import { HGLang } from "../../Language";
+import { LanguageEnum, userType } from "../../Utils/AppTypes";
 const reducer = (
   state: loginDataType,
   action: { type: keyof loginDataType; payload: string }
@@ -22,15 +26,23 @@ interface loginDataType {
   email: string;
   birthday: string;
   phonnumber: string;
+  usersList: userType[];
 }
+
 const initialState: loginDataType = {
   name: "",
   email: "",
   birthday: "",
   phonnumber: "",
+  usersList: [],
 };
 export default function Login() {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const languageContext = useContext(LanguageContext);
+  const { language, setLanguage } = languageContext;
+  const themeContext = useContext(ThemeContext);
+  const { theme } = themeContext;
+  console.log(language, "language", theme, "theme");
   const onClickButton = () => {
     console.log("on Form Submit", state);
   };
@@ -42,7 +54,36 @@ export default function Login() {
 
   return (
     <div className="container">
-      <h2>Login</h2>
+      <Grid
+        style={{ marginBottom: 10 }}
+        alignItems={"center"}
+        container
+        spacing={2}
+      >
+        <Grid item xs={4}>
+          <Button
+            color={theme === "dark" ? "success" : "primary"}
+            onClick={() => setLanguage(LanguageEnum.en)}
+            fullWidth
+            variant={language === "en" ? "contained" : "outlined"}
+            size="large"
+          >
+            English
+          </Button>
+        </Grid>
+        <Grid item xs={4}>
+          <Button
+            onClick={() => setLanguage(LanguageEnum.de)}
+            fullWidth
+            variant={language === "de" ? "contained" : "outlined"}
+            size="large"
+          >
+            Germany
+          </Button>
+        </Grid>
+        <Grid item xs={4}></Grid>
+      </Grid>
+      <h2>{HGLang(language).login}</h2>
       <form>
         <Grid alignItems={"center"} container spacing={2}>
           <Grid item xs={6}>
@@ -53,7 +94,7 @@ export default function Login() {
                 dispatch({ type: "name", payload: t.target.value })
               }
               id="outlined-basic"
-              label={"Name & Last Name"}
+              label={HGLang(language).nameLastName}
               variant="outlined"
             />
           </Grid>
@@ -65,7 +106,7 @@ export default function Login() {
                 dispatch({ type: "email", payload: t.target.value })
               }
               id="outlined-basic"
-              label={"Email"}
+              label={HGLang(language).email}
               variant="outlined"
             />
           </Grid>
@@ -77,7 +118,7 @@ export default function Login() {
                 dispatch({ type: "birthday", payload: t.target.value })
               }
               id="outlined-basic"
-              label={"Bithday"}
+              label={HGLang(language).birthDay}
               variant="outlined"
             />
           </Grid>
@@ -89,7 +130,7 @@ export default function Login() {
                 dispatch({ type: "phonnumber", payload: t.target.value })
               }
               id="outlined-basic"
-              label={"Phone Number"}
+              label={HGLang(language).phonenumber}
               variant="outlined"
             />
           </Grid>
@@ -100,7 +141,7 @@ export default function Login() {
               variant="contained"
               size="large"
             >
-              Submit
+              {HGLang(language).submit}
             </Button>
           </Grid>
         </Grid>
